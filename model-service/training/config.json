@@ -1,0 +1,21 @@
+{
+  "architecture": "efficientnet_b0",
+  "classes": ["benign", "malignant"],
+  "model_path": "../models/oral_model.pt",
+  "input_size": 224,
+  "normalization": {
+    "mean": [0.485, 0.456, 0.406],
+    "std": [0.229, 0.224, 0.225]
+  },
+  "minimum_confidence": 0.65,
+  "risk_thresholds": {
+    "meaningful_malignant_probability": 0.2,
+    "high_malignant_probability": 0.65
+  },
+  "dataset_source": {
+    "name": "Oral Images Dataset",
+    "doi": "10.17632/mhjyrn35p4.2",
+    "license": "CC BY 4.0 (as provided by the dataset user)"
+  },
+  "dataset_license": "CC BY 4.0 (as provided by the dataset user)"
+}

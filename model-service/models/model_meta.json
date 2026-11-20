@@ -1,0 +1,83 @@
+{
+  "architecture": "efficientnet_b0",
+  "framework": "PyTorch",
+  "class_names": [
+    "benign",
+    "malignant"
+  ],
+  "classes": [
+    "benign",
+    "malignant"
+  ],
+  "input_size": 224,
+  "normalization": {
+    "mean": [
+      0.485,
+      0.456,
+      0.406
+    ],
+    "std": [
+      0.229,
+      0.224,
+      0.225
+    ]
+  },
+  "training_date_utc": "2026-11-17T17:50:43.161685+00:00",
+  "dataset_counts_per_split": {
+    "train": {
+      "benign": 115,
+      "malignant": 110
+    },
+    "val": {
+      "benign": 25,
+      "malignant": 24
+    },
+    "test": {
+      "benign": 25,
+      "malignant": 24
+    }
+  },
+  "validation_metrics": {
+    "sampleCount": 49,
+    "accuracy": 0.7959183673469388,
+    "macroSensitivity": 0.7949999999999999,
+    "macroSpecificity": 0.7949999999999999,
+    "macroAuc": 0.8966666666666666,
+    "perClass": {
+      "benign": {
+        "support": 25,
+        "precision": 0.7777777777777778,
+        "sensitivity": 0.84,
+        "specificity": 0.75,
+        "f1": 0.8076923076923077,
+        "auc": 0.8966666666666666
+      },
+      "malignant": {
+        "support": 24,
+        "precision": 0.8181818181818182,
+        "sensitivity": 0.75,
+        "specificity": 0.84,
+        "f1": 0.7826086956521738,
+        "auc": 0.8966666666666666
+      }
+    },
+    "confusionMatrix": [
+      [
+        21,
+        4
+      ],
+      [
+        6,
+        18
+      ]
+    ]
+  },
+  "dataset_source": {
+    "name": "Oral Images Dataset",
+    "doi": "10.17632/mhjyrn35p4.2",
+    "license": "CC BY 4.0 (as provided by the dataset user)"
+  },
+  "dataset_license": "CC BY 4.0 (as provided by the dataset user)",
+  "pretrained_on_imagenet": true,
+  "model_path": "C:\\Users\\YTC CHINTAPALLI\\Desktop\\file\\aarogya\\model-service\\models\\oral_model.pt"
+}

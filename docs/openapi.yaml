@@ -1,0 +1,346 @@
+openapi: 3.1.0
+info:
+  title: Aarogya Drishti API
+  version: 1.0.0
+  description: >-
+    Partial OpenAPI reference for implemented API surfaces. This snapshot is
+    maintained manually and is not yet an exhaustive contract. The service is
+    a simulation and is not for clinical use.
+servers:
+  - url: /api/v1
+security:
+  - bearerAuth: []
+paths:
+  /health:
+    get:
+      security: []
+      summary: Report API, database, and storage readiness
+      responses:
+        '200':
+          description: Health payload; storage may be unconfigured or unverified.
+        '503':
+          description: API or database is not ready.
+  /auth/otp/request:
+    post:
+      security: []
+      summary: Request a patient one-time code
+      responses:
+        '200':
+          description: Request accepted.
+        '400':
+          description: Invalid request.
+        '429':
+          description: Rate limit exceeded.
+  /auth/otp/verify:
+    post:
+      security: []
+      summary: Verify a patient one-time code
+      responses:
+        '200':
+          description: Verification result and session flow response.
+        '400':
+          description: Invalid or expired code.
+  /auth/login:
+    post:
+      security: []
+      summary: Start staff login
+      responses:
+        '200':
+          description: Login or required security setup response.
+        '401':
+          description: Invalid credentials.
+  /auth/refresh:
+    post:
+      security: []
+      summary: Rotate the refresh session
+      responses:
+        '200':
+          description: New access session.
+        '401':
+          description: Missing, expired, or revoked session.
+  /auth/logout:
+    post:
+      summary: Revoke the current session
+      responses:
+        '200':
+          description: Session revoked.
+  /users/me:
+    get:
+      summary: Get the authenticated account
+      responses:
+        '200':
+          description: Account payload.
+    patch:
+      summary: Update allowed current-account fields
+      responses:
+        '200':
+          description: Updated account payload.
+  /patients/me:
+    get:
+      summary: Read the authenticated patient's profile
+      responses:
+        '200':
+          description: Patient profile.
+        '403':
+          description: Role or care relationship is not authorized.
+    patch:
+      summary: Update the authenticated patient's profile
+      responses:
+        '200':
+          description: Updated profile.
+  /patients/me/screenings:
+    get:
+      summary: List the authenticated patient's screening sessions and reports
+      responses:
+        '200':
+          description: The patient's own screening sessions.
+        '401':
+          description: Authentication is required.
+    post:
+      summary: Start a screening session after active screening consent
+      responses:
+        '201':
+          description: Screening session created.
+        '403':
+          description: Screening consent is missing or withdrawn.
+  /patients/me/screenings/{screeningSessionId}:
+    get:
+      summary: Resume or read the authenticated patient's own screening session
+      parameters:
+        - in: path
+          name: screeningSessionId
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Session, saved answers, and advisory reports.
+        '404':
+          description: Session does not belong to this patient.
+  /patients/me/screenings/{screeningSessionId}/photos:
+    post:
+      summary: Validate and analyze a patient photo with active consents
+      description: Requires private object storage and a server-side Gemini key. Rejects poor quality and never returns a public storage URL.
+      parameters:
+        - in: path
+          name: screeningSessionId
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [file, region]
+              properties:
+                file: { type: string, format: binary }
+                region: { type: string, enum: [tongue, inner_cheeks, gums, lips, floor_of_mouth, roof_of_mouth, other] }
+      responses:
+        '201':
+          description: Immutable advisory report created.
+        '400':
+          description: Invalid file or photo quality is inadequate.
+        '403':
+          description: Required consent is inactive.
+        '503':
+          description: AI or private storage is not configured.
+  /patients/me/screenings/{screeningSessionId}/complete:
+    post:
+      summary: Complete a screening session after answers are saved
+      responses:
+        '200':
+          description: Screening session completed.
+        '409':
+          description: Questionnaire answers are missing.
+  /patients/{patientId}/questionnaire:
+    get:
+      summary: Read the active configurable questionnaire definition
+      responses:
+        '200':
+          description: Questionnaire questions and options.
+    post:
+      summary: Save or resume questionnaire answers while screening consent is active
+      responses:
+        '201':
+          description: Questionnaire answers saved.
+        '403':
+          description: Consent or patient access is denied.
+  /hospitals:
+    get:
+      security: []
+      summary: Search platform-registered hospitals
+      parameters:
+        - in: query
+          name: city
+          schema: { type: string }
+        - in: query
+          name: service
+          schema: { type: string }
+        - in: query
+          name: department
+          schema: { type: string }
+        - in: query
+          name: latitude
+          schema: { type: number }
+        - in: query
+          name: longitude
+          schema: { type: number }
+        - in: query
+          name: radiusKm
+          schema: { type: number }
+      responses:
+        '200':
+          description: Hospital directory results.
+  /hospitals/{hospitalId}:
+    get:
+      security: []
+      summary: Get a hospital profile
+      parameters:
+        - $ref: '#/components/parameters/HospitalId'
+      responses:
+        '200':
+          description: Hospital profile.
+        '404':
+          description: Hospital not found.
+  /hospitals/{hospitalId}/doctors:
+    get:
+      security: []
+      summary: List doctors at a hospital
+      parameters:
+        - $ref: '#/components/parameters/HospitalId'
+      responses:
+        '200':
+          description: Doctor directory results.
+  /appointments:
+    post:
+      summary: Create an appointment request
+      responses:
+        '201':
+          description: Appointment request created.
+        '409':
+          description: Requested slot is no longer available.
+        '403':
+          description: Required authorization or consent is missing.
+  /appointments/mine:
+    get:
+      summary: List the authenticated patient's or doctor's appointments
+      responses:
+        '200':
+          description: Appointments belonging to the caller.
+  /appointments/slots:
+    get:
+      summary: List future available slots for a verified doctor
+      responses:
+        '200':
+          description: Available slots (up to 50).
+        '403':
+          description: Patient role required.
+  /appointments/{appointmentId}/status:
+    patch:
+      summary: Update an appointment status as its patient or assigned doctor
+      responses:
+        '200':
+          description: Appointment status updated.
+        '403':
+          description: Caller does not own the appointment.
+  /doctor/cases:
+    get:
+      summary: List the doctor's assigned appointment queue
+      responses:
+        '200':
+          description: Appointment queue, limited to 50 items.
+        '403':
+          description: Doctor role required.
+  /doctor/cases/{patientId}/reports:
+    get:
+      summary: Read AI reports with active care assignment and data-sharing consent
+      responses:
+        '200':
+          description: Advisory reports marked not for clinical use.
+        '403':
+          description: Assignment or active consent is missing.
+  /doctor/consultations/{consultationId}/notes:
+    post:
+      summary: Create a signed immutable consultation note version
+      responses:
+        '201':
+          description: New note version created.
+        '403':
+          description: Active care assignment is required.
+  /doctor/cases/{patientId}/referrals:
+    post:
+      summary: Create a referral for an assigned patient
+      responses:
+        '201':
+          description: Referral created for navigation.
+        '403':
+          description: Active care assignment is required.
+  /doctor/cases/{patientId}/follow-ups:
+    post:
+      summary: Schedule an assigned patient's follow-up
+      responses:
+        '201':
+          description: Follow-up reminder created.
+        '403':
+          description: Active care assignment is required.
+  /sync/batch:
+    post:
+      summary: Replay authenticated offline operations
+      description: Limited to 50 operations per request; clientOpId values are idempotency keys.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [operations]
+              properties:
+                operations:
+                  type: array
+                  maxItems: 50
+                  items:
+                    type: object
+                    required: [clientOpId, route]
+                    properties:
+                      clientOpId: { type: string, format: uuid }
+                      route: { type: string, maxLength: 200 }
+                      method: { type: string, enum: [POST, PATCH, PUT, DELETE] }
+                      kind: { type: string, maxLength: 80 }
+                      payload: {}
+      responses:
+        '200':
+          description: Per-operation results.
+        '409':
+          description: Operation ID belongs to another account.
+  /field/registrations:
+    post:
+      summary: Register a patient within a health worker's assigned catchment
+      responses:
+        '201':
+          description: Registration and consent records created.
+        '403':
+          description: Role or catchment scope is not authorized.
+        '409':
+          description: Duplicate registration or idempotency conflict.
+  /field/district/dashboard:
+    get:
+      summary: Get a district aggregate dashboard with small-cell suppression
+      responses:
+        '200':
+          description: Aggregated counts only; groups smaller than five are suppressed.
+        '403':
+          description: District officer role or assigned catchment is required.
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  parameters:
+    HospitalId:
+      in: path
+      name: hospitalId
+      required: true
+      schema:
+        type: string
+        pattern: '^[a-fA-F0-9]{24}$'

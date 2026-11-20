@@ -1,0 +1,16 @@
+{
+  "modelVersion": "REPLACE_WITH_IMMUTABLE_MODEL_VERSION",
+  "artifactSha256": {
+    "segmentation": "REPLACE_WITH_SHA256",
+    "classifier": "REPLACE_WITH_SHA256",
+    "oralDetector": "REPLACE_WITH_SHA256"
+  },
+  "calibration": {
+    "method": "temperature_scaling",
+    "temperature": null,
+    "confidenceThreshold": null,
+    "oralDetectionThreshold": null,
+    "validationDataset": "REPLACE_WITH_HELD_OUT_VALIDATION_DATASET_ID",
+    "calibrationDataset": "REPLACE_WITH_SEPARATE_CALIBRATION_DATASET_ID"
+  }
+}

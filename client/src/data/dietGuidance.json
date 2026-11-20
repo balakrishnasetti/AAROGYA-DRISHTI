@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "clinicalReview": {
+    "status": "pending",
+    "reviewer": null,
+    "reviewedAt": null
+  },
+  "regions": [
+    "andhra",
+    "telangana",
+    "south",
+    "north",
+    "east",
+    "west"
+  ],
+  "stages": {
+    "prevention": {
+      "titleKey": "diet.stages.prevention",
+      "tipKeys": ["diet.stageTips.prevention"]
+    },
+    "screening": {
+      "titleKey": "diet.stages.screening",
+      "tipKeys": ["diet.stageTips.screening"]
+    },
+    "postTreatment": {
+      "titleKey": "diet.stages.postTreatment",
+      "tipKeys": ["diet.stageTips.postTreatment"]
+    }
+  },
+  "foodsToEat": [
+    { "key": "softFoods", "tags": ["soft", "nutrientRich"] },
+    { "key": "fruitVegetables", "tags": ["produce"] },
+    { "key": "protein", "tags": ["protein"] },
+    { "key": "energyFoods", "tags": ["energy"] }
+  ],
+  "foodsToAvoid": [
+    { "key": "tobacco", "tags": ["avoidAlways"] },
+    { "key": "betel", "tags": ["avoidAlways"] },
+    { "key": "alcohol", "tags": ["avoidAlways"] },
+    { "key": "irritants", "tags": ["soreMouth"] },
+    { "key": "roughFoods", "tags": ["soreMouth"] }
+  ],
+  "mealIdeas": [
+    { "id": "andhra-idli", "mealType": "breakfast", "regions": ["andhra", "south"], "vegetarian": true, "image": "/diet/soft-meal.svg", "titleKey": "diet.meals.idli", "descriptionKey": "diet.meals.idliDescription" },
+    { "id": "andhra-pesarattu", "mealType": "breakfast", "regions": ["andhra", "telangana"], "vegetarian": true, "image": "/diet/protein-meal.svg", "titleKey": "diet.meals.pesarattu", "descriptionKey": "diet.meals.pesarattuDescription" },
+    { "id": "andhra-egg-rice", "mealType": "breakfast", "regions": ["andhra", "telangana", "south", "east"], "vegetarian": false, "image": "/diet/protein-meal.svg", "titleKey": "diet.meals.softEgg", "descriptionKey": "diet.meals.softEggDescription" },
+    { "id": "north-dalia", "mealType": "breakfast", "regions": ["north"], "vegetarian": true, "image": "/diet/soft-meal.svg", "titleKey": "diet.meals.dalia", "descriptionKey": "diet.meals.daliaDescription" },
+    { "id": "east-soft-rice", "mealType": "breakfast", "regions": ["east"], "vegetarian": true, "image": "/diet/soft-meal.svg", "titleKey": "diet.meals.softRice", "descriptionKey": "diet.meals.softRiceDescription" },
+    { "id": "andhra-khichdi", "mealType": "lunch", "regions": ["andhra", "telangana", "south"], "vegetarian": true, "image": "/diet/soft-meal.svg", "titleKey": "diet.meals.khichdi", "descriptionKey": "diet.meals.khichdiDescription" },
+    { "id": "west-dal-rice", "mealType": "lunch", "regions": ["west"], "vegetarian": true, "image": "/diet/protein-meal.svg", "titleKey": "diet.meals.dalRice", "descriptionKey": "diet.meals.dalRiceDescription" },
+    { "id": "north-dal-rice", "mealType": "lunch", "regions": ["north"], "vegetarian": true, "image": "/diet/protein-meal.svg", "titleKey": "diet.meals.dalRice", "descriptionKey": "diet.meals.dalRiceDescription" },
+    { "id": "fish-rice", "mealType": "lunch", "regions": ["east", "south"], "vegetarian": false, "image": "/diet/protein-meal.svg", "titleKey": "diet.meals.softFishRice", "descriptionKey": "diet.meals.softFishRiceDescription" },
+    { "id": "soft-chicken-rice", "mealType": "lunch", "regions": ["andhra", "telangana", "south", "north", "west"], "vegetarian": false, "image": "/diet/protein-meal.svg", "titleKey": "diet.meals.softChickenRice", "descriptionKey": "diet.meals.softChickenRiceDescription" },
+    { "id": "soft-curd-rice", "mealType": "dinner", "regions": ["andhra", "telangana", "south"], "vegetarian": true, "image": "/diet/soft-meal.svg", "titleKey": "diet.meals.curdRice", "descriptionKey": "diet.meals.curdRiceDescription" },
+    { "id": "soft-roti-dal", "mealType": "dinner", "regions": ["north", "west"], "vegetarian": true, "image": "/diet/protein-meal.svg", "titleKey": "diet.meals.softRotiDal", "descriptionKey": "diet.meals.softRotiDalDescription" },
+    { "id": "egg-stew-rice", "mealType": "dinner", "regions": ["south", "east"], "vegetarian": false, "image": "/diet/protein-meal.svg", "titleKey": "diet.meals.eggStewRice", "descriptionKey": "diet.meals.eggStewRiceDescription" },
+    { "id": "andhra-soft-fish", "mealType": "dinner", "regions": ["andhra", "telangana", "south"], "vegetarian": false, "image": "/diet/protein-meal.svg", "titleKey": "diet.meals.softFishRice", "descriptionKey": "diet.meals.softFishRiceDescription" },
+    { "id": "fruit-yogurt", "mealType": "snack", "regions": ["andhra", "telangana", "south", "north", "east", "west"], "vegetarian": true, "image": "/diet/fruit-bowl.svg", "titleKey": "diet.meals.fruitYogurt", "descriptionKey": "diet.meals.fruitYogurtDescription" }
+  ]
+}

@@ -1,0 +1,72 @@
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: ['./index.html', './src/**/*.{js,jsx}'],
+  darkMode: 'class',
+  theme: {
+    extend: {
+      colors: {
+        ink: 'var(--color-ink)',
+        muted: 'var(--color-muted)',
+        canvas: 'var(--color-canvas)',
+        surface: 'var(--color-surface)',
+        teal: {
+          50: '#e3f1f3',
+          100: '#cfe7eb',
+          200: '#a6cfd8',
+          300: '#78b9c8',
+          400: '#4a9bb0',
+          500: '#327f96',
+          600: '#28778e',
+          700: '#1e6578',
+          800: '#194e5d',
+          900: '#153c47',
+          950: '#0b2830',
+        },
+        amber: {
+          50: '#fff6df',
+          100: '#ffecc2',
+          200: '#ffe2a3',
+          300: '#f4ce7b',
+          400: '#e7b955',
+          500: '#dca83e',
+          600: '#b98224',
+          700: '#754e0b',
+          800: '#5f400a',
+          900: '#4c3308',
+          950: '#2d1f07',
+        },
+        moonlight: {
+          DEFAULT: '#e7b955',
+          soft: '#f4ce7b',
+          pale: '#ffe2a3',
+        },
+        green: {
+          50: '#e2f3e9',
+          100: '#c6e7d3',
+          200: '#9bd5b3',
+          300: '#70c391',
+          400: '#45ad70',
+          500: '#268d55',
+          600: '#187b4a',
+          700: '#17613d',
+          800: '#124c31',
+          900: '#103b28',
+          950: '#09291c',
+        },
+        night: {
+          DEFAULT: '#103640',
+          deep: '#0a252c',
+          black: '#07171c',
+        },
+        bright: '#ffffff',
+      },
+      fontSize: {
+        'display-sm': ['2.5rem', { lineHeight: '1.1', fontWeight: '700' }],
+      },
+      minHeight: {
+        touch: '3rem',
+      },
+    },
+  },
+  plugins: [],
+};

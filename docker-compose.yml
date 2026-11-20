@@ -1,0 +1,125 @@
+services:
+  mongo:
+    image: mongo:8
+    restart: unless-stopped
+    volumes:
+      - mongo_data:/data/db
+    healthcheck:
+      test: ['CMD', 'mongosh', '--quiet', '--eval', "db.adminCommand('ping').ok"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  minio:
+    image: minio/minio:latest
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: ${STORAGE_ACCESS_KEY:?Set STORAGE_ACCESS_KEY in server/.env}
+      MINIO_ROOT_PASSWORD: ${STORAGE_SECRET_KEY:?Set STORAGE_SECRET_KEY in server/.env}
+      MINIO_BUCKET: ${STORAGE_BUCKET:?Set STORAGE_BUCKET in server/.env}
+    volumes:
+      - minio_data:/data
+    ports:
+      - '127.0.0.1:9000:9000'
+      - '127.0.0.1:9001:9001'
+    restart: unless-stopped
+
+  minio-init:
+    image: minio/mc:latest
+    depends_on:
+      - minio
+    environment:
+      MINIO_ROOT_USER: ${STORAGE_ACCESS_KEY:?Set STORAGE_ACCESS_KEY in server/.env}
+      MINIO_ROOT_PASSWORD: ${STORAGE_SECRET_KEY:?Set STORAGE_SECRET_KEY in server/.env}
+      MINIO_BUCKET: ${STORAGE_BUCKET:?Set STORAGE_BUCKET in server/.env}
+    entrypoint: ['/bin/sh', '-c']
+    command: |
+      until mc alias set local http://minio:9000 "$$MINIO_ROOT_USER" "$$MINIO_ROOT_PASSWORD"; do
+        sleep 2
+      done
+      mc mb --ignore-existing "local/$$MINIO_BUCKET"
+      mc anonymous set none "local/$$MINIO_BUCKET"
+
+  server:
+    build:
+      context: .
+      dockerfile: server/Dockerfile
+    restart: unless-stopped
+    env_file:
+      - ./server/.env
+    environment:
+      NODE_ENV: production
+      PORT: 4000
+      MONGO_URI: mongodb://mongo:27017/aarogya_drishti
+      CLIENT_URL: http://localhost:8080
+      STORAGE_BACKEND: s3
+      STORAGE_ENDPOINT: http://minio:9000
+      STORAGE_BUCKET: ${STORAGE_BUCKET:-aarogya-private-photos}
+      STORAGE_REGION: us-east-1
+      ORAL_MODEL_API_URL: ${ORAL_MODEL_API_URL:-http://model-service:8000}
+      ORAL_MODEL_API_TOKEN: ${MODEL_API_TOKEN:-}
+      ORAL_MODEL_VERSION: ${ORAL_MODEL_VERSION:-}
+    depends_on:
+      mongo:
+        condition: service_healthy
+      minio-init:
+        condition: service_completed_successfully
+    healthcheck:
+      test:
+        [
+          'CMD',
+          'node',
+          '-e',
+          "fetch('http://127.0.0.1:4000/api/v1/health').then((r) => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))",
+        ]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+    expose:
+      - '4000'
+
+  model-service:
+    profiles: ['oral-model']
+    build:
+      context: ./model-service
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    environment:
+      MODEL_API_TOKEN: ${MODEL_API_TOKEN:-}
+      ORAL_MODEL_VERSION: ${ORAL_MODEL_VERSION:-}
+      ORAL_MODEL_MANIFEST: /models/manifest.json
+      ORAL_SEGMENTATION_WEIGHTS: /models/segmentation.pt
+      ORAL_CLASSIFIER_WEIGHTS: /models/classifier.pt
+      ORAL_DETECTOR_WEIGHTS: /models/oral-detector.pt
+      MODEL_PATH: ${ORAL_MODEL_PATH:-/models/oral_model.pt}
+      MODEL_CONFIG_PATH: /app/training/config.json
+    volumes:
+      - ${ORAL_MODEL_ARTIFACTS_DIR:-./model-service/models}:/models:ro
+    healthcheck:
+      test:
+        [
+          'CMD',
+          'python',
+          '-c',
+          "import json,urllib.request; d=json.load(urllib.request.urlopen('http://127.0.0.1:8000/health')); raise SystemExit(0 if d['status']=='ready' else 1)",
+        ]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    expose:
+      - '8000'
+
+  client:
+    build:
+      context: .
+      dockerfile: client/Dockerfile
+    restart: unless-stopped
+    depends_on:
+      server:
+        condition: service_healthy
+    ports:
+      - '8080:80'
+
+volumes:
+  mongo_data:
+  minio_data:

@@ -1,0 +1,42 @@
+const district = 'Alluri Sitharama Raju';
+const state = 'Andhra Pradesh';
+
+export const syntheticReferenceDataset = [
+  { caseId: 'Case 01', patientId: 'AD-DEMO-0001', name: 'Ramesh Naidu', sex: 'M', age: 56, village: 'Munchingput', mandal: 'Munchingput', language: 'English', tobacco: false, betelQuid: false, alcohol: false, symptomWeeks: 0, aiFinding: 'No abnormality seen', site: '-', riskLevel: 'Low', confidence: 0.93, doctorAction: 'Agree', workflowStatus: 'Closed', biopsy: 'Not required' },
+  { caseId: 'Case 02', patientId: 'AD-DEMO-0002', name: 'Lakshmi Devi', sex: 'F', age: 60, village: 'Ananthagiri', mandal: 'Ananthagiri', language: 'English', tobacco: false, betelQuid: false, alcohol: true, symptomWeeks: 0, aiFinding: 'No abnormality seen', site: '-', riskLevel: 'Low', confidence: 0.9, doctorAction: 'Agree', workflowStatus: 'Follow-up due', biopsy: 'Result entered (SYNTHETIC)' },
+  { caseId: 'Case 03', patientId: 'AD-DEMO-0003', name: 'Venkata Rao', sex: 'M', age: 47, village: 'G.Madugula', mandal: 'G.Madugula', language: 'English', tobacco: false, betelQuid: false, alcohol: false, symptomWeeks: 1, aiFinding: 'Mild irritation near tooth', site: 'Right cheek', riskLevel: 'Low', confidence: 0.84, doctorAction: 'Agree', workflowStatus: 'Screened', biopsy: 'Not required' },
+  { caseId: 'Case 04', patientId: 'AD-DEMO-0004', name: 'Sita Mahalakshmi', sex: 'F', age: 56, village: 'Lambasingi', mandal: 'Chintapalle', language: 'Telugu', tobacco: false, betelQuid: false, alcohol: false, symptomWeeks: 1, aiFinding: 'Benign-looking ulcer, healing', site: 'Lower lip', riskLevel: 'Low', confidence: 0.81, doctorAction: 'Agree', workflowStatus: 'Closed', biopsy: 'Not required' },
+  { caseId: 'Case 05', patientId: 'AD-DEMO-0005', name: 'Appa Rao', sex: 'M', age: 30, village: 'G.Madugula', mandal: 'G.Madugula', language: 'English', tobacco: true, betelQuid: true, alcohol: false, symptomWeeks: 4, aiFinding: 'Persistent white area', site: 'Left cheek', riskLevel: 'Moderate', confidence: 0.71, doctorAction: 'Pending', workflowStatus: 'Under review', biopsy: 'Not required' },
+  { caseId: 'Case 06', patientId: 'AD-DEMO-0006', name: 'Kamala Kumari', sex: 'F', age: 56, village: 'G.Madugula', mandal: 'G.Madugula', language: 'Telugu', tobacco: true, betelQuid: false, alcohol: true, symptomWeeks: 6, aiFinding: 'White patch', site: 'Tongue (side)', riskLevel: 'Moderate', confidence: 0.74, doctorAction: 'Agree', workflowStatus: 'Referred', biopsy: 'Not required' },
+  { caseId: 'Case 07', patientId: 'AD-DEMO-0007', name: 'Srinivas Reddy', sex: 'M', age: 70, village: 'Pedabayalu', mandal: 'Pedabayalu', language: 'English', tobacco: true, betelQuid: true, alcohol: true, symptomWeeks: 5, aiFinding: 'Red patch', site: 'Floor of mouth', riskLevel: 'High', confidence: 0.78, doctorAction: 'Agree', workflowStatus: 'Referred', biopsy: 'Not required' },
+  { caseId: 'Case 08', patientId: 'AD-DEMO-0008', name: 'Padmavathi', sex: 'F', age: 44, village: 'Dumbriguda', mandal: 'Dumbriguda', language: 'English', tobacco: true, betelQuid: true, alcohol: false, symptomWeeks: 8, aiFinding: 'Non-healing ulcer', site: 'Tongue (side)', riskLevel: 'High', confidence: 0.86, doctorAction: 'Agree', workflowStatus: 'Biopsy pending', biopsy: 'Ordered' },
+  { caseId: 'Case 09', patientId: 'AD-DEMO-0009', name: 'Ganesh Babu', sex: 'M', age: 34, village: 'Paderu', mandal: 'Paderu', language: 'Telugu', tobacco: true, betelQuid: true, alcohol: true, symptomWeeks: 10, aiFinding: 'Ulcer with raised edge', site: 'Buccal mucosa', riskLevel: 'High', confidence: 0.88, doctorAction: 'Agree', workflowStatus: 'Biopsy result', biopsy: 'Result entered (SYNTHETIC)' },
+  { caseId: 'Case 10', patientId: 'AD-DEMO-0010', name: 'Rajeswari', sex: 'F', age: 41, village: 'Hukumpeta', mandal: 'Hukumpeta', language: 'Telugu', tobacco: true, betelQuid: true, alcohol: true, symptomWeeks: 12, aiFinding: 'Lump / growth', site: 'Lower gum', riskLevel: 'High', confidence: 0.9, doctorAction: 'Agree', workflowStatus: 'In treatment', biopsy: 'Result entered (SYNTHETIC)' },
+  { caseId: 'Case 11', patientId: 'AD-DEMO-0011', name: 'Nageswara Rao', sex: 'M', age: 32, village: 'Borra', mandal: 'Ananthagiri', language: 'Telugu', tobacco: true, betelQuid: true, alcohol: false, symptomWeeks: 16, aiFinding: 'Restricted mouth opening, fibrous bands', site: 'Both cheeks', riskLevel: 'Moderate', confidence: 0.69, doctorAction: 'Pending', workflowStatus: 'Under review', biopsy: 'Not required' },
+  { caseId: 'Case 12', patientId: 'AD-DEMO-0012', name: 'Anjali Devi', sex: 'F', age: 28, village: 'Pedabayalu', mandal: 'Pedabayalu', language: 'Telugu', tobacco: false, betelQuid: false, alcohol: false, symptomWeeks: 0, aiFinding: 'Image blurry - retake requested', site: '-', riskLevel: 'Unclear', confidence: 0, doctorAction: 'N/A', workflowStatus: 'Registered', biopsy: 'Not required' },
+  { caseId: 'Case 13', patientId: 'AD-DEMO-0013', name: 'Subba Rao', sex: 'M', age: 31, village: 'Paderu', mandal: 'Paderu', language: 'Telugu', tobacco: true, betelQuid: false, alcohol: false, symptomWeeks: 3, aiFinding: 'Ambiguous finding', site: 'Palate', riskLevel: 'Unclear', confidence: 0.48, doctorAction: 'Pending', workflowStatus: 'Under review', biopsy: 'Not required' },
+  { caseId: 'Case 14', patientId: 'AD-DEMO-0014', name: 'Durga Bhavani', sex: 'F', age: 60, village: 'Sunkarametta', mandal: 'Araku Valley', language: 'Telugu', tobacco: true, betelQuid: true, alcohol: false, symptomWeeks: 7, aiFinding: 'White patch', site: 'Buccal mucosa', riskLevel: 'Moderate', confidence: 0.73, doctorAction: 'Override: reclassified Low (frictional keratosis)', workflowStatus: 'Biopsy pending', biopsy: 'Ordered' },
+  { caseId: 'Case 15', patientId: 'AD-DEMO-0015', name: 'Ravi Kumar', sex: 'M', age: 53, village: 'Araku Valley', mandal: 'Araku Valley', language: 'Telugu', tobacco: true, betelQuid: false, alcohol: true, symptomWeeks: 9, aiFinding: 'Red-white mixed patch', site: 'Tongue (underside)', riskLevel: 'High', confidence: 0.8, doctorAction: 'Agree', workflowStatus: 'Referred', biopsy: 'Not required' },
+  { caseId: 'Case 16', patientId: 'AD-DEMO-0016', name: 'Saroja', sex: 'F', age: 29, village: 'Lambasingi', mandal: 'Chintapalle', language: 'Telugu', tobacco: false, betelQuid: false, alcohol: false, symptomWeeks: 0, aiFinding: 'No abnormality seen', site: '-', riskLevel: 'Low', confidence: 0.95, doctorAction: 'Agree', workflowStatus: 'Screened', biopsy: 'Not required' },
+  { caseId: 'Case 17', patientId: 'AD-DEMO-0017', name: 'Prasad Varma', sex: 'M', age: 34, village: 'Hukumpeta', mandal: 'Hukumpeta', language: 'Telugu', tobacco: true, betelQuid: true, alcohol: false, symptomWeeks: 14, aiFinding: 'Non-healing ulcer', site: 'Lip', riskLevel: 'High', confidence: 0.84, doctorAction: 'Agree', workflowStatus: 'Follow-up due', biopsy: 'Result entered (SYNTHETIC)' },
+  { caseId: 'Case 18', patientId: 'AD-DEMO-0018', name: 'Vijaya Lakshmi', sex: 'F', age: 46, village: 'Borra', mandal: 'Ananthagiri', language: 'Telugu', tobacco: true, betelQuid: true, alcohol: false, symptomWeeks: 26, aiFinding: 'White patch, stable', site: 'Left cheek', riskLevel: 'Moderate', confidence: 0.7, doctorAction: 'Agree', workflowStatus: 'Follow-up due', biopsy: 'Result entered (SYNTHETIC)' },
+  { caseId: 'Case 19', patientId: 'AD-DEMO-0019', name: 'Satyanarayana', sex: 'M', age: 28, village: 'Chintapalle', mandal: 'Chintapalle', language: 'English', tobacco: true, betelQuid: false, alcohol: true, symptomWeeks: 11, aiFinding: 'Swelling', site: 'Retromolar area', riskLevel: 'High', confidence: 0.83, doctorAction: 'Agree', workflowStatus: 'Biopsy result', biopsy: 'Result entered (SYNTHETIC)' },
+  { caseId: 'Case 20', patientId: 'AD-DEMO-0020', name: 'Bhargavi', sex: 'F', age: 64, village: 'Dumbriguda', mandal: 'Dumbriguda', language: 'Telugu', tobacco: false, betelQuid: false, alcohol: false, symptomWeeks: 0, aiFinding: 'No abnormality seen', site: '-', riskLevel: 'Low', confidence: 0, doctorAction: 'N/A', workflowStatus: 'Registered', biopsy: 'Not required' },
+].map((item) => ({
+  ...item,
+  district,
+  state,
+}));
+
+export function findSyntheticReferencePatient(query) {
+  const search = query.trim().toLocaleLowerCase();
+  if (!search) return null;
+  return (
+    syntheticReferenceDataset.find(
+      (record) =>
+        record.patientId.toLocaleLowerCase() === search ||
+        record.caseId.toLocaleLowerCase() === search ||
+        record.name.toLocaleLowerCase() === search,
+    ) || null
+  );
+}
