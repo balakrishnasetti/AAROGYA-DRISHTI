@@ -71,17 +71,7 @@ export function createApp(environment) {
     });
   }
   app.use(
-    cors({
-      origin(origin, callback) {
-        if (!origin || allowedOrigins.has(origin)) {
-          return callback(null, true);
-        }
-        return callback(
-          new ApiError(403, 'ORIGIN_NOT_ALLOWED', 'This website is not allowed to access the API.'),
-        );
-      },
-      credentials: true,
-    }),
+    cors(),
   );
   app.use(compression());
   app.use(express.json({ limit: '100kb' }));
