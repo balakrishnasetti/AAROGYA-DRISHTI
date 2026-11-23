@@ -49,7 +49,7 @@ export function AuthProvider({ children }) {
     }
     if (!refreshInProgress) {
       refreshInProgress = axios
-        .post(`${import.meta.env.VITE_API_BASE_URL || '/api/v1'}/auth/refresh`, null, {
+        .post(`${import.meta.env.VITE_API_BASE_URL || 'https://aarogya-drishti-1-pgdm.onrender.com/api/v1'}/auth/refresh`, null, {
           withCredentials: true,
           timeout: 10000,
         })

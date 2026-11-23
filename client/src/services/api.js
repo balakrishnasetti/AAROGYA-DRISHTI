@@ -2,7 +2,7 @@ import axios from 'axios';
 import i18n from '../i18n/index.js';
 import { getAuthorizationToken, setAuthorizationToken } from './tokenStore.js';
 
-const baseURL = import.meta.env.VITE_API_BASE_URL || '/api/v1';
+const baseURL = "https://aarogya-drishti-1-pgdm.onrender.com/api/v1" ;
 const api = axios.create({
   baseURL,
   timeout: 10000,

@@ -4,6 +4,10 @@ import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig(({ mode }) => {
   const environment = loadEnv(mode, process.cwd(), '');
+  const configuredApiUrl =
+    environment.VITE_API_BASE_URL ||
+    'https://aarogya-drishti-1-pgdm.onrender.com/api/v1';
+  const backendOrigin = new URL(configuredApiUrl, 'http://localhost').origin;
   const deploymentEnvironment =
     environment.VITE_DEPLOYMENT_ENV ?? (mode === 'production' ? 'production' : 'development');
   const demoModeEnabledForBuild =
@@ -80,12 +84,12 @@ export default defineConfig(({ mode }) => {
     strictPort: true,
     proxy: {
       '/socket.io': {
-        target: 'http://localhost:4000',
+        target: backendOrigin,
         changeOrigin: true,
         ws: true,
       },
       '/api': {
-        target: 'http://localhost:4000',
+        target: backendOrigin,
         changeOrigin: true,
       },
     },

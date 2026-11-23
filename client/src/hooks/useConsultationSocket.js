@@ -6,7 +6,7 @@ function socketOrigin() {
   const configuredApiUrl = import.meta.env.VITE_API_BASE_URL;
   return configuredApiUrl
     ? new URL(configuredApiUrl, window.location.origin).origin
-    : window.location.origin;
+    : 'https://aarogya-drishti-1-pgdm.onrender.com';
 }
 
 export default function useConsultationSocket(enabled = true) {

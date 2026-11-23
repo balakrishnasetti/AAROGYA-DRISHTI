@@ -40,7 +40,7 @@ npm run dev
 
 For patient photo uploads, set `STORAGE_ACCESS_KEY` and `STORAGE_SECRET_KEY` in `server\.env` before starting MinIO. Use a unique local-development credential pair; MinIO uses these as its local administrator credentials. The Compose initialization service creates a private `aarogya-private-photos` bucket. MinIO's API and console are bound to `127.0.0.1` on ports 9000 and 9001. The API health check probes the configured bucket and reports `storage: available`, `unavailable`, or `not_configured`; it no longer reports storage as ready just because credentials exist.
 
-The client is served at `http://localhost:5173`, and the API listens on `http://localhost:4000`. The client defaults to the same-origin API path `/api/v1`; set `VITE_API_BASE_URL=http://localhost:4000/api/v1` in the client environment when developing across origins.
+The client is served at `http://localhost:5173`. It uses `https://aarogya-drishti-1-pgdm.onrender.com/api/v1` by default. Set `VITE_API_BASE_URL` in the client environment to override the backend URL.
 
 For an existing database, back it up and run the additive, idempotent care-journey migration once before using the admin stage counts:
 
